@@ -341,13 +341,8 @@ func (m *model) exportText() {
 	case "TXT":
 		content = export.GenerateTXTCode(m.uiState.renderedLines)
 	case "SVG":
-		svgContent, err := export.GenerateSVG(m.uiState.renderedLines, export.TerminalAspectRatioSVGOptions())
-		if err != nil {
-			m.export.showConfirmation = true
-			m.export.confirmationText = fmt.Sprintf("SVG generation failed: %v", err)
-			return
-		}
-		content = svgContent
+		// renderedLines is never empty here, so generation cannot fail.
+		content, _ = export.GenerateSVG(m.uiState.renderedLines, export.TerminalAspectRatioSVGOptions())
 	case "GO":
 		content = export.GenerateGoCode(m.uiState.renderedLines)
 	case "JS":

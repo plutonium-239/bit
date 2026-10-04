@@ -68,6 +68,7 @@ func TestGenerateSVG_RunMerging(t *testing.T) {
 		t.Fatalf("unexpected error: %v", err)
 	}
 
+	// "M" starts each subpath; counting them counts painted runs.
 	if strings.Count(svg, "M") != 1 {
 		t.Errorf("expected 1 merged run, got %d: %s", strings.Count(svg, "M"), svg)
 	}
@@ -85,6 +86,7 @@ func TestGenerateSVG_NoMergingAcrossColors(t *testing.T) {
 		t.Fatalf("unexpected error: %v", err)
 	}
 
+	// "M" starts each subpath; counting them counts painted runs.
 	if strings.Count(svg, "M") != 2 {
 		t.Errorf("expected 2 separate runs for different colors, got %d: %s", strings.Count(svg, "M"), svg)
 	}
@@ -101,6 +103,7 @@ func TestGenerateSVG_HalfBlocks(t *testing.T) {
 	}
 
 	// Two segments, each half cell height (8)
+	// "M" starts each subpath; counting them counts painted runs.
 	if strings.Count(svg, "M") != 2 {
 		t.Errorf("expected 2 segments for half blocks, got %d: %s", strings.Count(svg, "M"), svg)
 	}
